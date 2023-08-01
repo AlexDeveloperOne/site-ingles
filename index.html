@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>URL com Palavra do Array</title>
+    <style>
+      h1,
+      h2 {
+        text-align: center;
+      }
+      /* Estilo para posicionar os botões e a palavra atual no topo */
+      #topo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      /* Estilo para o ícone de caixa de som */
+      .icone-som {
+        font-size: 24px;
+        margin-right: 10px;
+        cursor: pointer;
+      }
+
+      /* Estilo para o frame */
+      #meuFrame {
+        width: 800px;
+        height: 600px;
+        border: none;
+        margin-top: 20px;
+        align-items: center;
+        align-content: center;
+      }
+
+      /* Estilo para a palavra atual */
+      #palavraAtual {
+        font-size: 36px;
+        font-weight: bold;
+        margin-right: 20px;
+        margin-left: 20px;
+      }
+
+      /* Estilo para os botões de avançar e retroceder */
+      #topo button {
+        margin: 0 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>English Learning</h1>
+    <h2>Increase your Vocabulary</h2>
+
+    <!-- Elemento para agrupar os botões e a palavra atual no topo -->
+    <div id="topo">
+      <button onclick="retroceder()">Retroceder</button>
+      <p><span id="palavraAtual"></span></p>
+      <span class="icone-som" onclick="pronunciarPalavra()">&#128266;</span>
+      <button onclick="avancar()">Avançar</button>
+    </div>
+
+    <!-- Frame onde a URL será carregada -->
+    <iframe id="meuFrame" frameborder="0"></iframe>
+
+    <!-- Defina o array com as palavras -->
+    <script>
+      const palavrasArray = [
+        'steps',
+        'to',
+        'an',
+        'effective',
+        'career',
+        'plan',
+        'identify',
+        'your',
+        'options',
+        'develop',
+        'a',
+        'refined',
+        'list',
+        'of',
+        'by',
+        'examining',
+        'interests',
+        'skills',
+        'and',
+        'values',
+        'through',
+        'selfassessment',
+        'narrow',
+        'reviewing',
+        'information',
+        'researching',
+        'companies',
+        'talking',
+        'professionals',
+        'in',
+        'the',
+        'field',
+        'you',
+        'can',
+        'further',
+        'when',
+        'take',
+        'part',
+        'experiences',
+        'such',
+        'as',
+        'shadowing',
+        'volunteering',
+        'internships',
+        'prioritize',
+        'its',
+        'not',
+        'enough',
+        'have',
+        'what',
+        'are',
+        'top',
+        'most',
+        'whats',
+        'important',
+        'whether',
+        'intellectually',
+        'challenging',
+        'work',
+        'familyfriendly',
+        'benefits',
+        'right',
+        'location',
+        'or',
+        'big',
+        'paycheck',
+        'it',
+        'helps',
+        'know',
+        'matters',
+        'dealbreaker',
+        'we',
+        'provide',
+        'assessments',
+        'set',
+        'up',
+        'appointment',
+        'with',
+        'advisor',
+        'advantage',
+        'this',
+        'service',
+        'make',
+        'comparisons',
+        'compare',
+        'promising',
+        'against',
+        'prioritized',
+        'consider',
+        'other',
+        'factors',
+        'should',
+        'beyond',
+        'personal',
+        'preferences',
+        'is',
+        'current',
+        'demand',
+        'for',
+        'if',
+        'low',
+        'entry',
+        'difficult',
+        'comfortable',
+        'risk',
+        'qualifications',
+        'required',
+        'enter',
+        'will',
+        'require',
+        'additional',
+        'education',
+        'training',
+        'how',
+        'selecting',
+        'option',
+        'affect',
+        'others',
+        'life',
+        'gather',
+        'advice',
+        'from',
+        'friends',
+        'colleagues',
+        'family',
+        'members',
+        'potential',
+        'outcomes',
+        'barriers',
+        'each',
+        'final',
+        'choice',
+        'choose',
+        'paths',
+        'that',
+        'best',
+        'many',
+        'depends',
+        'upon',
+        'situation',
+        'comfort',
+        'level',
+        'youre',
+        'early',
+        'planning',
+        'then',
+        'identifying',
+        'multiple',
+        'may',
+        'be',
+        'want',
+        'several',
+        'increase',
+        'number',
+        'opportunities',
+        'conversely',
+        'narrowing',
+        'one',
+        'two',
+        'better',
+        'focus',
+        'job',
+        'search',
+        'graduate',
+        'school',
+        'applications'
+      ]
+      let indiceAtual = 0
+
+      // Função para atualizar a palavra exibida na página
+      function atualizarPalavra() {
+        document.getElementById('palavraAtual').textContent =
+          palavrasArray[indiceAtual]
+      }
+
+      // Função para avançar para a próxima palavra do array
+      function avancar() {
+        indiceAtual = (indiceAtual + 1) % palavrasArray.length
+        atualizarPalavra()
+        atualizarURL()
+      }
+
+      // Função para retroceder para a palavra anterior do array
+      function retroceder() {
+        indiceAtual =
+          (indiceAtual - 1 + palavrasArray.length) % palavrasArray.length
+        atualizarPalavra()
+        atualizarURL()
+      }
+
+      // Função para reproduzir a pronúncia da palavra atual em inglês
+      function pronunciarPalavra() {
+        const palavraAtual = palavrasArray[indiceAtual]
+        const utterance = new SpeechSynthesisUtterance(palavraAtual)
+        utterance.lang = 'en-US' // Definindo o idioma como inglês
+        utterance.rate = 0.8 // Define a velocidade da fala para 0.8 (80% da velocidade padrão)
+        speechSynthesis.speak(utterance)
+      }
+
+      // Função para construir a URL usando a palavra atual e carregar no frame
+      function atualizarURL() {
+        const url =
+          'https://www.bing.com/images/search?q=' +
+          palavrasArray[indiceAtual] +
+          '&form=HDRSC3&first=1'
+
+        meuFrame.src = url
+        setTimeout(pronunciarPalavra, 600) // Atrasa a execução em 600ms
+      }
+
+      // Carregar a primeira palavra do array ao carregar a página
+      atualizarPalavra()
+      atualizarURL()
+    </script>
+  </body>
+</html>
