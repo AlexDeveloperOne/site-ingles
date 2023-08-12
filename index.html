@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>URL com Palavra do Array</title>
+    <title>English Learning</title>
     <style>
       h1,
       h2 {
@@ -45,21 +45,42 @@
         margin: 0 10px;
       }
     </style>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
     <h1>English Learning</h1>
     <h2>Increase your Vocabulary</h2>
 
     <!-- Elemento para agrupar os botões e a palavra atual no topo -->
-    <div id="topo">
-      <button onclick="retroceder()">Retroceder</button>
+    <!--
+    <div class="card text-white bg-success mb-3" style="max-width: 18rem">
+    -->
+    <div
+      id="topo"
+      class="navbar navbar-light"
+      style="background-color: #a8dbd9"
+    >
+      <button class="btn btn-success" onclick="retroceder()">Retroceder</button>
       <p><span id="palavraAtual"></span></p>
       <span class="icone-som" onclick="pronunciarPalavra()">&#128266;</span>
-      <button onclick="avancar()">Avançar</button>
+      <button class="btn btn-success" onclick="avancar()">Avançar</button>
     </div>
 
-    <!-- Frame onde a URL será carregada -->
-    <iframe id="meuFrame" frameborder="0"></iframe>
+    <!-- Frame onde a URL será carregada-->
+    <div class="embed-responsive embed-responsive-16by9">
+      <iframe
+        id="meuFrame"
+        class="container-fluid d-flex justify-content-center"
+        frameborder="0"
+        allowfullscreen
+        >></iframe
+      >
+    </div>
 
     <!-- Defina o array com as palavras -->
     <script>
